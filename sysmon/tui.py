@@ -1,8 +1,3 @@
-"""
-Jednoduché a přehledné TUI rozhraní pro terminálový monitor systému (Textual).
-Implementace základního uživatelského rozhraní k milníku 11. 11. 2026.
-"""
-
 from typing import Optional
 from textual import on
 from textual.app import App, ComposeResult
@@ -15,7 +10,6 @@ from sysmon.system_service import ProcessInfo, SystemService
 
 
 class KillConfirmModal(ModalScreen[bool]):
-    """Potvrzovací dialog pro ukončení vybraného procesu."""
 
     DEFAULT_CSS = """
     KillConfirmModal {
@@ -75,7 +69,6 @@ class KillConfirmModal(ModalScreen[bool]):
 
 
 class SystemMonitorApp(App):
-    """Hlavní aplikace terminálového správce úloh."""
 
     TITLE = "Terminálový správce procesů"
 
@@ -134,19 +127,26 @@ class SystemMonitorApp(App):
         table = self.query_one("#process-table", DataTable)
         table.cursor_type = "row"
         table.zebra_stripes = True
-        table.add_columns("PID", "Název", "Uživatel", "CPU %", "RAM %", "RAM (MB)", "Stav")
+        table.add_columns(
+            "PID", "Název", "Uživatel", "CPU %", "RAM %", "RAM (MB)", "Stav"
+        )
 
         self.refresh_data()
         self.set_interval(2.0, self.refresh_data)
 
     def refresh_data(self) -> None:
-        """Obnoví statistiky CPU/RAM a tabulku procesů."""
+
         if not self.is_running:
             return
 
         # 1. Horní informační lišta
         metrics = self.service.get_hardware_metrics()
-        sort_names = {"cpu_percent": "CPU", "memory_percent": "RAM", "pid": "PID", "name": "Název"}
+        sort_names = {
+            "cpu_percent": "CPU",
+            "memory_percent": "RAM",
+            "pid": "PID",
+            "name": "Název",
+        }
         sort_label = sort_names.get(self.sort_by, self.sort_by.upper())
         order_symbol = "↓" if self.sort_reverse else "↑"
 
@@ -184,7 +184,11 @@ class SystemMonitorApp(App):
             )
 
         if self.current_processes:
-            target_row = min(current_row, len(self.current_processes) - 1) if current_row >= 0 else 0
+            target_row = (
+                min(current_row, len(self.current_processes) - 1)
+                if current_row >= 0
+                else 0
+            )
             table.move_cursor(row=target_row)
 
     @on(Input.Changed, "#search-input")
