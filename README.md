@@ -1,11 +1,6 @@
 # Terminálový monitor systému (TUI)
 
-Jednoduchý a přehledný správce procesů pro terminál v jazyce **Python** (knihovny `Textual` a `psutil`).
-
-## 📌 Stav milníků (k 11. 11. 2026)
-- **14. 10. 2026:** Založení repozitáře a nastavení projektu.
-- **21. 10. 2026:** Analýza požadavků a návrh architektury ([`docs/ANALYZA_A_ARCHITEKTURA.md`](docs/ANALYZA_A_ARCHITEKTURA.md)).
-- **11. 11. 2026:** Implementace základního TUI (dashboard, tabulka procesů, řazení, vyhledávání, kill dialog).
+Interaktivní správce procesů a monitor systémových prostředků v jazyce **Python** (`Textual` a `psutil`).
 
 ## 🚀 Spuštění
 
@@ -17,22 +12,16 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## 🎮 Klávesové zkratky
+## 🎮 Ovládání a klávesové zkratky
 
-| Klávesa | Akce |
-|---|---|
-| `↑` / `↓` | Pohyb a výběr procesu |
-| `/` | Vyhledávání / filtr podle jména nebo PID |
-| `ESC` / `Enter` | Návrat do tabulky procesů |
-| `c` | Řazení podle CPU % |
-| `m` | Řazení podle RAM % |
-| `p` | Řazení podle PID |
-| `k` | Ukončit proces (s potvrzovacím oknem) |
-| `r` | Ruční obnova dat |
-| `q` | Ukončení aplikace |
-
-## 🧪 Testy
-
-```bash
-python -m unittest discover -s tests -v
-```
+| Klávesa | Akce | Popis |
+|---|---|---|
+| `↑` / `↓` | **Pohyb v tabulce** | Výběr aktivního procesu v seznamu |
+| `/` | **Hledat** | Aktivace vyhledávacího pole pro filtr procesů |
+| `ESC` / `Enter` | **Zpět** | Návrat z vyhledávání do tabulky procesů |
+| `c` | **Řadit dle CPU** | Seřadí procesy podle vytížení CPU |
+| `m` | **Řadit dle RAM** | Seřadí procesy podle využití paměti RAM |
+| `p` | **Řadit dle PID** | Seřadí procesy podle čísla PID |
+| `k` | **Ukončit (Kill)** | Otevře potvrzovací okno pro ukončení vybraného procesu |
+| `r` | **Obnovit** | Ruční obnova dat |
+| `q` | **Konec** | Ukončení aplikace |
